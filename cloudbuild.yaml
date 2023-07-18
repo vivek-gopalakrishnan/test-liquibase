@@ -6,23 +6,32 @@ steps:
 
   # Step 2: Build a Docker image of the application
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/liquibase-app:${SHORT_SHA}', '.']
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/liquibase-app:${SHORT_SHA}'
+      - '.'
     dir: '.'
 
   # Step 3: Push the Docker image to Google Container Registry (GCR)
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/liquibase-app:${SHORT_SHA}']
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/liquibase-app:${SHORT_SHA}'
 
   # Step 4: Run Liquibase to apply database changes
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['run', '--rm', '-v', '$PWD:/liquibase', 'liquibase/liquibase:4.9.0', 
-           '--driver=org.postgresql.Driver', 
-           '--url=jdbc:postgresql://34.30.179.209:5432/test-postgresql',
-           '--username=postgres', '--password=Welcome@123', 'update']
+    args:
+      - 'run'
+      - '--rm'
+      - '-v'
+      - '$(pwd):/liquibase'
+      - 'liquibase/liquibase:4.9.0'
+      - '--driver=org.postgresql.Driver'
+      - '--url=jdbc:postgresql://34.30.179.209:5432/test-postgresql'
+      - '--username=postgres'
+      - '--password=Welcome@123'
+      - 'update'
     dir: '.'
 
 timeout: 1800s
-
-
-options:
-  logging: CLOUD_LOGGING_ONLY
