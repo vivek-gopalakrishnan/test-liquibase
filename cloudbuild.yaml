@@ -35,5 +35,6 @@ steps:
     dir: '/workspace/liquibase'  # Adjust the directory to the 'liquibase' directory
 
 timeout: 1800s
-substitutions:
-  _BUCKET: your-bucket-name  # Replace 'your-bucket-name' with the name of your GCP Cloud Storage bucket (if required)
+
+options:
+  logging: CLOUD_LOGGING_ONLY
