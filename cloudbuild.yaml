@@ -1,0 +1,14 @@
+steps:
+  - name: 'gcr.io/cloud-builders/wget'
+    args: ['https://github.com/liquibase/liquibase/releases/download/v4.9.0/liquibase-4.9.0.tar.gz']
+    dir: 'liquibase'
+
+  - name: 'gcr.io/cloud-builders/tar'
+    args: ['-xzf', 'liquibase/liquibase-4.9.0.tar.gz']
+    dir: 'liquibase'
+
+  - name: 'liquibase/liquibase:4.9.0'
+    args: ['--driver=org.postgresql.Driver', '--url=jdbc:postgresql://10.74.32.9:5432/postgres ', '--username=postgres', '--password=Welcome@123', 'update']
+
+timeout: 1800s
+
