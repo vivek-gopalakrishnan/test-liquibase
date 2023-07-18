@@ -1,16 +1,28 @@
 steps:
-  - name: 'gcr.io/cloud-builders/wget'
-    args: ['https://github.com/liquibase/liquibase/releases/download/v4.23.0/liquibase-4.23.0.tar.gz']
-    dir: '/workspace'
+  # Step 1: Build the Spring Boot application
+  - name: 'gcr.io/cloud-builders/mvn'
+    args: ['clean', 'install']
+    dir: '.'
 
-  - name: 'gcr.io/cloud-builders/tar'
-    args: ['tar -xzf', '/workspace/liquibase-4.23.0.tar.gz']
-    dir: '/workspace'
+  # Step 2: Build a Docker image of the application
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/poised-sunrise-390308/liquibase-app:${SHORT_SHA}', '.']
+    dir: '.'
 
-  - name: 'liquibase/liquibase:latest'
-    args: ['--driver=org.postgresql.Driver', '--url=jdbc:postgresql://10.74.32.9:5432/postgres', '--username=postgres', '--password=Welcome@123', 'update']
+  # Step 3: Push the Docker image to Google Container Registry (GCR)
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/poised-sunrise-390308/liquibase-app:${SHORT_SHA}']
+
+  # Step 4: Run Liquibase to apply database changes
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['run', '--rm', '-v', '$PWD:/liquibase', 'liquibase/liquibase:4.9.0', 
+           '--driver=org.postgresql.Driver', 
+           '--url=jdbc:postgresql://34.30.179.209:5432/test-postgresql',
+           '--username=postgres', '--password=Welcome@123', 'update']
+    dir: '.'
 
 timeout: 1800s
+
 
 options:
   logging: CLOUD_LOGGING_ONLY
