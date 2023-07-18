@@ -28,7 +28,7 @@ steps:
       - '/workspace/liquibase:/liquibase'
       - 'liquibase/liquibase:4.9.0'
       - '--driver=org.postgresql.Driver'
-      - '--url=jdbc:postgresql://your-cloudsql-instance-ip:5432/test-postgresql'
+      - '--url=jdbc:postgresql://34.30.179.209:5432/test-postgresql'
       - '--username=postgres'
       - '--password=Welcome@123'
       - 'update'
