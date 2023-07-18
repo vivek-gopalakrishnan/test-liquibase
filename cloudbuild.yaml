@@ -1,4 +1,9 @@
 steps:
+  - name: 'gcr.io/cloud-builders/tar'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'docker pull gcr.io/cloud-builders/tar:latest'
   - name: 'gcr.io/cloud-builders/wget'
     args: ['https://github.com/liquibase/liquibase/releases/download/v4.9.0/liquibase-4.9.0.tar.gz']
     dir: 'liquibase'
