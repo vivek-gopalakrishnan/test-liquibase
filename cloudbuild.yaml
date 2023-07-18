@@ -6,12 +6,12 @@ steps:
 
   # Step 2: Build a Docker image of the application
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/poised-sunrise-390308/liquibase-app:${SHORT_SHA}', '.']
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/liquibase-app:${SHORT_SHA}', '.']
     dir: '.'
 
   # Step 3: Push the Docker image to Google Container Registry (GCR)
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/poised-sunrise-390308/liquibase-app:${SHORT_SHA}']
+    args: ['push', 'gcr.io/$PROJECT_ID/liquibase-app:${SHORT_SHA}']
 
   # Step 4: Run Liquibase to apply database changes
   - name: 'gcr.io/cloud-builders/docker'
