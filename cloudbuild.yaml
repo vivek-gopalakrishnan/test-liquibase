@@ -4,7 +4,7 @@ steps:
     dir: '/workspace'
 
   - name: 'gcr.io/cloud-builders/tar'
-    args: ['tar -xzvf', '/workspace/liquibase-4.23.0.tar.gz']
+    args: ['tar -xzf', '/workspace/liquibase-4.23.0.tar.gz']
     dir: '/workspace'
 
   - name: 'liquibase/liquibase:latest'
