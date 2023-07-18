@@ -53,9 +53,9 @@
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<configuration>
 					<driver>org.postgresql.Driver</driver>
-					<url>jdbc:postgresql://localhost:5432/</url>
+					<url>jdbc:poised-sunrise-390308:us-central1:test-postgresql</url>
 					<username>postgres</username>
-					<password>admin@123</password>
+					<password>Welcome@123</password>
 					<defaultSchemaName>cp</defaultSchemaName>
 					<changelogSchemaName>cp</changelogSchemaName>
 					<!-- <changeLogFile>src/main/resources/liquibase-db.xml</changeLogFile> 	 -->			
