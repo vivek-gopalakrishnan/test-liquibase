@@ -1,15 +1,16 @@
 steps:
- - name: 'gcr.io/cloud-builders/wget'
+  - name: 'gcr.io/cloud-builders/wget'
     args: ['https://github.com/liquibase/liquibase/releases/download/v4.9.0/liquibase-4.9.0.tar.gz']
     dir: '/workspace'
- - name: 'gcr.io/cloud-builders/tar@sha256:566339a73438a86392534776f3132d27156698c22d10643a9c6821a474858425'
+
+  - name: 'gcr.io/cloud-builders/tar@sha256:566339a73438a86392534776f3132d27156698c22d10643a9c6821a474858425'
     args: ['-xzf', '/workspace/liquibase-4.9.0.tar.gz']
-    dir: '/workspace
+    dir: '/workspace'
+
   - name: 'liquibase/liquibase:4.9.0'
-    args: ['--driver=org.postgresql.Driver', '--url=jdbc:postgresql://10.74.32.9:5432/postgres ', '--username=postgres', '--password=Welcome@123', 'update']
+    args: ['--driver=org.postgresql.Driver', '--url=jdbc:postgresql://10.74.32.9:5432/postgres', '--username=postgres', '--password=Welcome@123', 'update']
 
 timeout: 1800s
 
 options:
   logging: CLOUD_LOGGING_ONLY
-
