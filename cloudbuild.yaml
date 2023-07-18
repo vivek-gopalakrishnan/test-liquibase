@@ -1,38 +1,43 @@
 steps:
-  # Step 1: Build the Spring Boot application
+  # Step 1: Clone the repository
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['clone', 'https://github.com/vivek-gopalakrishnan/test-liquibase.git']
+    dir: '/workspace'
+
+  # Step 2: Build the Spring Boot application using Maven
   - name: 'gcr.io/cloud-builders/mvn'
     args: ['clean', 'install']
-    dir: '.'
+    dir: '/workspace/liquibase'  # Adjust the directory to the 'liquibase' directory
 
-  # Step 2: Build a Docker image of the application
+  # Step 3: Build a Docker image of the application
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/liquibase-app:${SHORT_SHA}'
+      - 'gcr.io/$PROJECT_ID/liquibase-app:latest'  # Replace 'latest' with the desired version tag
       - '.'
-    dir: '.'
+    dir: '/workspace/liquibase'  # Adjust the directory to the 'liquibase' directory
 
-  # Step 3: Push the Docker image to Google Container Registry (GCR)
+  # Step 4: Push the Docker image to Google Container Registry (GCR)
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'gcr.io/$PROJECT_ID/liquibase-app:${SHORT_SHA}'
+      - 'gcr.io/$PROJECT_ID/liquibase-app:latest'  # Replace 'latest' with the desired version tag
 
-  # Step 4: Run Liquibase to apply database changes
+  # Step 5: Run Liquibase to apply database changes
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'run'
       - '--rm'
       - '-v'
-      - '$(pwd):/liquibase'
+      - '/workspace/liquibase:/liquibase'
       - 'liquibase/liquibase:4.9.0'
       - '--driver=org.postgresql.Driver'
       - '--url=jdbc:postgresql://34.30.179.209:5432/test-postgresql'
       - '--username=postgres'
       - '--password=Welcome@123'
       - 'update'
-    dir: '.'
+    dir: '/workspace/liquibase'  # Adjust the directory to the 'liquibase' directory
 
 timeout: 1800s
 
