@@ -2,9 +2,9 @@ steps:
  - name: 'gcr.io/cloud-builders/wget'
     args: ['https://github.com/liquibase/liquibase/releases/download/v4.9.0/liquibase-4.9.0.tar.gz']
     dir: '/workspace'
-  - name: 'gcr.io/cloud-builders/tar'
+ - name: 'gcr.io/cloud-builders/tar:1.8.3'
     args: ['-xzf', '/workspace/liquibase-4.9.0.tar.gz']
-    dir: '/workspace'
+    dir: '/workspace
   - name: 'liquibase/liquibase:4.9.0'
     args: ['--driver=org.postgresql.Driver', '--url=jdbc:postgresql://10.74.32.9:5432/postgres ', '--username=postgres', '--password=Welcome@123', 'update']
 
