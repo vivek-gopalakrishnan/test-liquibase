@@ -2,7 +2,7 @@ steps:
  - name: 'gcr.io/cloud-builders/wget'
     args: ['https://github.com/liquibase/liquibase/releases/download/v4.9.0/liquibase-4.9.0.tar.gz']
     dir: '/workspace'
- - name: 'gcr.io/cloud-builders/tar:1.8.3'
+ - name: 'gcr.io/cloud-builders/tar@sha256:566339a73438a86392534776f3132d27156698c22d10643a9c6821a474858425'
     args: ['-xzf', '/workspace/liquibase-4.9.0.tar.gz']
     dir: '/workspace
   - name: 'liquibase/liquibase:4.9.0'
