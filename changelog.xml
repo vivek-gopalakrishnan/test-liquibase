@@ -1,0 +1,9 @@
+<changeset id="1" author="Vivek">
+  <sql>
+    CREATE TABLE users (
+      id INT NOT NULL AUTO_INCREMENT,
+      name VARCHAR(255) NOT NULL,
+      PRIMARY KEY (id)
+    );
+  </sql>
+</changeset>
