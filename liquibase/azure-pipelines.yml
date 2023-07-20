@@ -1,15 +1,15 @@
 trigger:
   branches:
     include:
-      - none
+      - main  # Replace 'main' with the branch name you want to trigger the pipeline on
 
 pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  PGHOST: 'postgretestdb2.postgres.database.azure.com'
-  PGUSER: 'pavan'
-  PGPASSWORD: 'Test@123'
+  PGHOST: 'test-postgres-2.postgres.database.azure.com'
+  PGUSER: 'admin123'
+  PGPASSWORD: 'Welcome@123'
   PGDATABASE: 'postgres'
 
 steps:
@@ -20,10 +20,16 @@ steps:
       goals: 'clean package'
 
   - script: |
+      # Set variables for liquibase
+      export PGHOST=$(PGHOST)
+      export PGUSER=$(PGUSER)
+      export PGPASSWORD=$(PGPASSWORD)
+      export PGDATABASE=$(PGDATABASE)
+      
       # Execute liquibase
       liquibase --changeLogFile=db.changelog.xml \
-                --url=jdbc:postgresql://postgresql-name:5432/database-name \
-                --username=$(PGUSER) \
-                --password=$(PGPASSWORD) \
+                --url=jdbc:postgresql://$PGHOST:5432/$PGDATABASE \
+                --username=$PGUSER \
+                --password=$PGPASSWORD \
                 update
     displayName: 'Run Liquibase Update'
