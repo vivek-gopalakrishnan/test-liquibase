@@ -53,17 +53,18 @@
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<configuration>
 					<driver>org.postgresql.Driver</driver>
-					<url>jdbc:poised-sunrise-390308:us-central1:test-postgresql</url>
-					<username>postgres</username>
+					<url>jdbc:postgresql://test-postgres-2.postgres.database.azure.com:5432/postgres</url>
+					<username>admin123</username>
 					<password>Welcome@123</password>
 					<defaultSchemaName>cp</defaultSchemaName>
 					<changelogSchemaName>cp</changelogSchemaName>
-					<!-- <changeLogFile>src/main/resources/liquibase-db.xml</changeLogFile> 	 -->			
+					<changeLogFile>src/main/resources/ChangeLog2.xml</changeLogFile>			
 					
-					<outputChangeLogFile>src/main/resources/liquibase-outputChangeLog.xml</outputChangeLogFile>   
+					<!--	<outputChangeLogFile>src/main/resources/liquibase-outputChangeLog.xml</outputChangeLogFile>   -->   
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 
 </project>
+

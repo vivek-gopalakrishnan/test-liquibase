@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <changeSet author="vivek (generated)" id="1689785461711-1">
+        <createTable tableName="ac_fail_empl_asgn_lock">
+            <column name="ac_fail_empl_asgn_lock_oid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="empl_oid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="asmt_turn_oid" type="BIGINT"/>
+            <column name="cp_crew_pos_dtls_oid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="crtd_user_id" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="crtd_ts" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updt_user_id" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="last_updt_ts" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+<!-- CREATE TAG -->
+<changeSet id="sid-000001-0010-tag" author="vivek" labels="sid-000001">
+<tagDatabase tag="sid-000001-0010-tag" />
+</changeSet>
+
+<!-- ADD COLUMN -->
+<changeSet id="sid-000001-0010-add-column" author="vivek" labels="sid-000001">
+<comment></comment>
+<addColumn tableName="test_lock">
+<column name="test_column" type="VARCHAR(10)">
+<constraints nullable="true" />
+</column>
+</addColumn>
+</changeSet>
+</databaseChangeLog>
