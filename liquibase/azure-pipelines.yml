@@ -1,0 +1,29 @@
+trigger:
+  branches:
+    include:
+      - none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  PGHOST: '/test-postgres-2.postgres.database.azure.com'
+  PGUSER: 'admin123'
+  PGPASSWORD: 'Welcome@123'
+  PGDATABASE: 'postgres'
+
+steps:
+  - task: Maven@3
+    displayName: 'Build project'
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: 'clean package'
+
+  - script: |
+      # Execute liquibase
+      liquibase --changeLogFile=db.changelog.xml \
+                --url=jdbc:postgresql://test-postgres-2.postgres.database.azure.com:5432/postgres \
+                --username=$(PGUSER) \
+                --password=$(PGPASSWORD) \
+                update
+    displayName: 'Run Liquibase Update'
