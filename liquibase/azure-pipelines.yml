@@ -16,7 +16,7 @@ steps:
   - task: Maven@3
     displayName: 'Build project'
     inputs:
-      mavenPomFile: 'pom.xml'
+      mavenPomFile: 'liquibase/pom.xml'
       goals: 'clean package'
 
   - script: |
